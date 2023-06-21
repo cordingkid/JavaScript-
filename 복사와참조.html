@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <input type="text" id="merong" value="ㅎㅇㅎㅇ">
+</body>
+<script>
+/*
+    call by value , call by reference
+
+    복사와 참조 모르면 개발자 할수 없음
+    원시 타입(primitive)은 복사, 객체(Object)는 참조(Reference)로 동작!
+    원시타입( string, number, boolean) 은 [복사]가 된다!
+    객체(Object)는 배열, JSON, 함수 [참조]
+*/
+    // "use strict"; // 엄격 모드 적용
+    // var aaa = "aaa";
+    // var bbb = aaa;
+
+    // bbb = "bbb";
+    // // alert("체크 : "+ aaa); 복사 되었기 때문에
+
+    // var black = {
+    //     name : "제니"
+    // };
+
+    // var pink = black;
+    // pink.name = "로제";
+
+    // alert("채크 : " + black.name); // 로제가 뜬다. black과 pink는 같은 곳을 가리키는 포인터!(참조)
+    // 메모리를 크게 쓰는 (객체)들은 참조방식으로 구현했기 때문에
+/*
+    let, var, const
+*/
+
+
+
+// test 객체
+// var test = document.querySelector("#merong");
+
+// alert(typeof(test));
+// typeof() 괄호안에 객체의 타입을 알려준다.
+
+// test.value = "바보";
+
+// var ggg = "roze man man se"; // 원시타입 문자열(string)
+// var bbb = new String("kgb");
+// 원시타입에 (.)을 붙이는 순간 Wrapper 객체로 자동으로 바뀜
+// alert(ggg.substring(0,5));
+
+
+// var num = "272272";
+// // alert(num);
+// alert(Number.MAX_SAFE_INTEGER);
+</script>

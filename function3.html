@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // $.each 만들어보기 (콜백에 익숙해지기)
+
+    const $ = {};   //네임스페이용 빈 객체
+    $.each = function(pArg, pCallback) { // $.each(배열,콜백함수)
+        if(Array.isArray(pArg)){    // 첫번쨰 매개변수가 배열이 왔을떄
+            for(let i=0; i<pArg.length; i++) {
+                pCallback(i, pArg[i]);
+            }
+        } else{// 첫번쨰 매개변수가 배열이 아닐때(그냥 Object)
+            for(let attr in pArg) {
+                pCallback(attr, pArg[attr]);
+            }
+        }
+    }
+
+    // 테스트
+    $.each(["가","나","다","라","마","바","사"],function(pInx,pVal){
+        console.log(`${pInx} => ${pVal}`);
+    });
+    console.log("=============================");
+    $.each({name : "정수", age : 30, pos : "반장"},function(attr,v){
+        console.log(`${attr} => ${v}`);
+    });
+    // 콜백은 포문이 끝까지 돌기 때문에 성능하락 주의   데이터가 적을떄 써도 괜찮
+    // 로직에 좀더 집중해야함
+</script>

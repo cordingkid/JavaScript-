@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+// 가능 자동으로 형변환 되어서
+// (객체)는 비었든 안 비었든 무조건 true이다 존재 하기때문에
+if("ㅎㅇ"){
+    alert("ddd");
+}
+
+// 숫자는 오직 0만 false이다.
+var aaa = !0; // true의 변칙 표현 글자수를 줄이기 위함
+if(aaa){
+    alert("ddd");
+}
+
+// 불가능 "" false, 나머진 전부 true
+if(""){
+    alert("ddd");
+}
+
+const test = function(pArg){
+    pArg();
+    // alert(typeof(pArg));
+    return "언디파인드잡기";
+}
+
+// test(2727);
+// test("e7e");
+// test([1,2,3]);
+// test({name:"ㅎㅇ"});
+
+// 아래 케이스가 아주 많이 사용됨! (callback이라 부름 -> 비동기 덕분에 더 인기)
+alert(test(function(){
+    alert("안녕");
+})); 
+// 정식 선언법
+
+// alert(test());
+// function test(){    // hoisting(호이스팅-> 선언부만 맨위로 올리는거 성능향상) 선언만 먼저 읽는다 프로그램이
+//     return "가나다";
+//     // return; 기본적으로 return이 된다. (생략되어있음)
+//     // 아무것도 없을때 undifined 나옴
+// }    
+
+// 함수 선언 표현식
+// 표현식 1+2+3 -4 -6 연산을 통한 결과가 하나로 나오는거
+// const test = function(){ return "가나다" }; // 함수 표현식은 순서대로 진행되기때문에 오류가 난다 위에서 호출하면
+// alert(test()); 
+</script>

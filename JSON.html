@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <h1 id="dajim">난 최고의 프로그래머</h1>
+</body>
+<script>
+    // document.querySelector("#dajim").style.color = "blue";
+
+    // 배열식 접근법
+    var color = "color";
+    document.querySelector("#dajim").style[color] = "blue";
+    color = "background-color"
+    document.querySelector("#dajim").style[color] = "yellow";
+
+    // JSON (JavaScript Object Notation) 거의 데이터통신 표준 포맷
+
+
+    // 기본
+    // let name = "merong";
+    // var jungsu = {  // {}는 new Object(); 내부적으로 동작
+    //     name : name,  // 속성명은 변수처리 안됨! 문자열 처리되기 떄문
+    //     role : "개그맨",
+    //     song: ["뽀뽀뽀","뽀로로"]
+    // };
+    // 키값과 변수명이 같을떄 안써도됨 근데 추천은 안함
+    
+    
+    
+    // 배열식 접근법 -> [중요] 손가락이 외울 정도로 
+    // var jungsu = {  
+    //     ["name"]: "사람2",  
+    //     ["role"]: "개발자2",
+    //     ["song"]: ["가나다","가나다2"]
+    // };
+
+    // 연관배열
+    var name = "우하하";
+    var jungsu = {  
+        [name]: "사람2",  // 속성명을 동적으로 줄수 있음
+        ["1"]: "개발자2",
+        ["2"]: ["가나다","가나다2"]
+    };
+
+    // jungsu.2 = "ppp";  변수 선언 규칙 위반(숫자로 변수명 시작 금지)
+
+    console.log(jungsu);
+    console.log(jungsu[1]);
+    console.log(jungsu[2]);
+
+</script>

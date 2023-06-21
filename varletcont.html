@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // var | let | const (let과 const는 나중(ES6)에 나옴 )
+    // var는 function 키워드에 갇히고, let은 {}에 같힘
+
+    // var는 중괄호 안에서만 쓰이는게 아니고 쓸수있다. let은 줄괄호에서만 가능
+    // for(var i = 1; i<=10; i++){}
+    // console.log("체크  : " + i); // 11
+
+    // var i = 100;    // 전역변수
+    // function test(){    // var의 영역(scope)를 나누는 기준은 무조건 function 키워드
+    //     var i = 10; // 지역변수
+    //     alert("첫번쨰 " + i);
+    // }
+    // alert("두번쨰 " + i);   // 100
+    // test();     // 10
+
+    // 에러가 난다 바꾸지 못하기때문 
+    // const cTest = "가";// const도 원시타입 , 객체타입을 구분해서 사용법을 기억해야함
+    // cTest = "나";
+
+    // const cTest = {name : "정수", age : 100};
+
+    // cTest.age = 40;
+    // console.log(cTest);
+    
+    // cTest = {name : "안정수"}; // 객체자체를 바꿀수 없으므로 에러!!
+    // console.log(cTest);
+    
+    // 메모리 leak 
+    let myObj = {name:"로제"};
+    myObj = {name : "정수"};    // Memory leak발생, {name : "로제"}를 찾을수 없게 되어 버림;
+    // let yourObj = myObj;
+    // let testArr = [];
+    // testArr.push(yourObj);
+
+    // conosle.log(yourObj);
+    // console.log(testArr[0]);
+</script>

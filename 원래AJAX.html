@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>Document</title>
+<body>
+    <button onclick="callAjax()">에이젝스</button>    
+    <div id="disp"></div>
+</body>
+<script>
+    // DRY -> Do not Repeat Yourself (반목하지 마셈)
+    // KISS -> Keep It Simple, Stupid (심플하게 해 바보얌!)
+
+    const myDisp = document.querySelector("#disp");
+
+    function callAjax() {
+        $.ajax({
+            method : "get",
+            url : "/jsstudy/data.json",
+            dataType : "json",
+            success : function(resp){
+                let tblStr ="<table border='1'>"
+                tblStr += "<tr><th>이름</th><th>나이</th><th>별명</th></tr>";
+                // 확장자 .jsp(내부적으로 .java파일로 바뀌는 동작) 안에서는 \$식으로 써야 함!
+                for(let i = 0 ; i <resp.length; i++){
+                    tblStr += "<tr>";
+                    tblStr +=`<td>${resp[i].name}</td>`;
+                    tblStr +=`<td>${resp[i].age}</td>`;
+                    tblStr +=`<td>${resp[i].alias}</td>`;
+                    tblStr += "</tr>";
+                }
+                tblStr += "</table>"
+                myDisp.innerHTML = tblStr;
+                console.log("넘겨받은 값은 : ",resp);
+            }
+        });
+    }
+
+    var $ = {};
+    
+    
+    // 매개변수를 갯수에 상관없이 편하게 제어하려면 {}을 이용하여 json으로 처리하는법
+    $.ajax = function(pOption){
+        /*
+        원래 자바스크립트는 비동기가 없다 OS가 도와준다
+        */
+        // 동기와 비동기?
+        var xhr = new XMLHttpRequest(); //심부름꾼 생성 
+
+        // 위에 xhr 이 전역변수가 아주 나쁨
+        // 전역변수로 쓰는 것은 좋지 않다.
+
+        // 효율성때문에 비동기를 권장
+        // 하지만 동기도 필요할 때가 있음(보통 공유 자원이라 부르는 것을 사용할 때)
+        xhr.open(pOption.method, pOption.url,true); // 심부름꾼이 갔다올곳 지정
+
+        // onreadystatechange 모니터링 한다.
+
+        xhr.onreadystatechange = function() { // 심부름꾼 모니터링
+            // 우린 중간 상태는 관심이 없음, 오직 끝난 것만 관심!
+            if (xhr.readyState == 4 && xhr.status == 200) { // 심부름꾼 모니터링
+                if(pOption.dataType == "json"){
+                    pOption.success(JSON.parse(xhr.responseText));
+                }else{
+                    pOption.success(xhr.responseText);
+                }
+                // console.log("xhr.responseText: " + xhr.responseText);
+                // alert(먼저 뜨면 동기);
+            }
+        }
+        xhr.send();
+        // alert("먼저 뜨면 비동기"); // 이게 먼저 뜬다.
+    }
+</script>

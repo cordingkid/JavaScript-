@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // return 아무거나 다됨; // 추천 x
+const calculator = function(pOp){
+    if(pOp === '+'){
+        return function(pA,pB){
+            return pA + pB;
+        }
+    }
+    if(pOp === '-'){
+        return function(pA,pB){
+            return pA - pB;
+        }
+    }
+    if(pOp === 'X'){
+        return function(pA,pB){
+            return pA * pB;
+        }
+    }
+}
+// alert(calculator('+')(3, 7));
+// alert(calculator('X')(3, 7));
+console.log(calculator('+')(3,calculator('-')(7, 4)));
+</script>

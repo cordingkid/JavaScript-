@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <div class="merong fbi">메</div>
+    <div class="merong">롱</div>
+    <div class="merong fbi">멍</div>
+    <div class="merong">청</div>
+    <div class="merong">이</div>    
+</body>
+<script>
+    /*
+        var ggg ="멍청이";
+        alert(window.ggg);
+    
+    window.aaa = function(){alert("ㅎㅇ")}; 
+    aaa();
+    */
+    //즉각 실행 함수
+    // ()나 ! 를 쓰는거다 이외를 쓰다 걸리면 혼남
+    // var $; window.$
+    (function(arg){ //표현식 컴퓨터가 실행해야될 연산식으로 받아서 익명 함수가 가능하다.
+        var $ = function(pSel) { // Factory 패턴
+            return new MyDom(pSel);
+        }
+
+
+    // function을 class의 의미로 쓰기
+        var MyDom = function(pSel){
+            var elems = document.querySelectorAll(pSel);
+            // jQuery는 선택된 DOM 요소를 자신의 속성으로 옮겨 담음
+            // 자신의 매소드에서 편하게 접근하기 위해서
+            
+            this.length = elems.length; //자신의 속성 length추가
+            for(let i = 0; i < elems.length; i++){ // 옮겨 담기
+                this[i] = elems[i];
+            }
+            
+            return this;    //class의 의미로 쓰면 요것이 생략되어있음, 명시적 표현
+        }
+        window.$ = $; // 전역변수 $와 지역변수 $가 같은 곳을 가르킨다.
+        $.fn = MyDom.prototype; // $.fn과 MyDom.prototype이 같은곳을 가리킴
+    })();
+
+    //jQuery는 서서히 떠나가지만 jQuery가 남긴 것은 계속 활용되고 있음!
+    //jQuery 코아를 간략 버전으로 이해하기
+
+    // 클래스 : 사용자 정의 데이터 타입
+
+    
+    // var divs = new myDom(".merong");
+    var divs = $(".merong.fbi");
+    console.log("체크 : ",divs);
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <div id="disp"></div>
+</body>
+<script>
+    const myDisp = document.querySelector("#disp");
+
+    const position = {
+        "level1" : "회장님",
+        "level2" : "사장님",
+        "level3" : "이장님",
+        "level4" : "반장님"
+    };
+
+    const jumins = [
+        {name : "신국현", age : 100, pos : "level1"},
+        {name : "전지혜", age : 50, pos : "level4"},
+        {name : "리수진", age : 25, pos : "level3"},
+        {name : "김지원", age : 20, pos : "level4"},
+        {name : "변정민", age : 30, pos : "level2"}
+    ];
+
+    // 자주 사용되는 문자열로 table 만들기
+    // 배열식접근법은 성능이떨어짐 로직처리하기 복잡할때 쓰는거 추천
+    var tblStr = "<table border='1'>";
+    tblStr += `<tr>
+                    <th>순번</th><th>이름</th><th>나이</th><th>직책</th>
+               </tr>`
+    for(let i = 0; i < jumins.length;i++) {
+        tblStr += `<tr>
+                        <td>${i+1}</td>
+                        <td>${jumins[i].name}</td>
+                        <td>${jumins[i].age}</td>
+                        <td>${position[jumins[i].pos]}</td>
+                   </tr>`
+    }
+    tblStr += "</table>";
+    myDisp.innerHTML = tblStr;
+</script>
