@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 자바스크립트 function키워드는 class의 의미도 가지고 있음
+    // 실제 class 키워드가 추가되었지만 , 내부적으로 function 키워드로
+    // 바뀌어 실행되기 떄문에 순수 자바스크립트(바닐라)에서 그냥 
+    // function 키워드를 쓰는 것이 일반적!
+
+    function MyArr(){
+        this.length = 0; // 초기값 0
+
+        // 매소드 추가
+        return this; // 생략 가능, class의 의미로 사용될 떈 생략되어있음
+    }
+
+    // 클래스의 매소드 공유 영역(prototype), 사실 속성을 넣어도 되는데 의미가 없음
+    MyArr.prototype.push = function(pElem){
+        // json 배열식 접근법
+        this[this.length] = pElem;
+        this.length++;
+        return this;    // 메소드 체이닝이 됨
+    }
+
+    // map 하고 reduce는 빅데이터 처리에서 많이쓰는 메소드,(보통 맵리라고 짧게 부름)
+    MyArr.prototype.map = function(pCallback){
+        for(let i=0; i<this.length; i++){
+            this[i] = pCallback.call(this, this[i],i);
+        }
+        return this;
+    }
+
+
+    MyArr.prototype.forEach = function(pCallback){
+        for(let i=0; i<this.length; i++){
+            // this를 자신을 반환 하기 위해call 해줌
+            pCallback.call(this,this[i], i);
+        }
+        return this; // 메소드 체이닝 가능
+    }
+
+    let aaa = new MyArr();
+    aaa.push("로제").push("유이현").push("전다미").push(["구","기","현"]);
+    aaa.map(function(v,i){
+        if(v == "유이현"){
+            return v + " 이다.";
+        }
+        if(i == 2){
+            return v + i + " 입니다.";
+        }
+        // 조건에 없는건 바로 리턴
+        return v;
+    });
+
+    console.log("[결과] ",aaa);
+    
+    // aaa.forEach(function(v,i){
+    //     // window
+    //     console.log("this",this);
+    //     console.log(`${i} ==> ${v}`);
+    // }).forEach(function(val,idx){
+    //     this[idx] = this[idx] + "ㅎㅇ";
+    // });
+
+
+    // let bbb = new MyArr();
+    // bbb.push("제니");
+    // console.log("bbb",bbb);
+
+
+
+
+</script>

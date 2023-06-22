@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // callback 연습하기
+    
+    // 자바의 ArrayList를 JS에서 만들기 배열과 같음
+    function ArrayList(){
+        this.length = 0;
+        return this;
+    }
+
+    // add
+    ArrayList.prototype.add = function(pElem){
+        this[this.length] = pElem;
+        this.length++;
+        return this;
+    }
+
+    
+    // get
+    ArrayList.prototype.get = function(pIdx){
+        return this[pIdx];
+    }
+
+
+    // set
+    ArrayList.prototype.set = function(pIdx, pVal){
+        this[pIdx] = pVal;
+    }
+
+    // remove
+    ArrayList.prototype.remove = function(pIdx){
+        for(let i = pIdx; i < this.length; i++){
+            this[i] = this[i+1]; //pIdx 부터 뒤에 값앞으로 떙기기
+        }
+        delete this[this.length -1]; // 앞에서 떙겻으니 마지막꺼만 지우기
+        this.length--;
+        return this;
+    }
+
+    // clear
+    ArrayList.prototype.clear = function(){
+        for(let i=0; i<this.length; i++){
+            delete this[i];
+        }
+        this.length = 0;
+        return this;
+    }
+
+    // size
+    ArrayList.prototype.size = function(){
+        return this.length;
+    }
+
+    var testArrayList = new ArrayList();
+    testArrayList.add("로제").add("제니").add("리사").add("지수");
+    console.log("[체크 1]", testArrayList);
+
+
+    console.log("[체크 2]", testArrayList.get(2));
+    
+    testArrayList.set(1,"박윤수");
+    console.log("[체크 3]", testArrayList);
+    
+    testArrayList.remove(1);
+    console.log("[체크 4]", testArrayList);
+    
+    console.log("[체크 5]", testArrayList.size());
+    
+    
+    testArrayList.clear();
+    console.log("[체크 6]", testArrayList);
+    
+</script>

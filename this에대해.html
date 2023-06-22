@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <button id="btn">버튼</button>
+</body>
+<script>
+
+const btn = document.querySelector("#btn");
+
+
+function click(pName){
+    console.log(pName + "님 이 누르셧습니다." + this.name + this.exp);
+    // console.log("click",this);
+}
+
+// function 줄때 click() 이렇게 주면 함수가 바로 실행해버림
+
+// 내가 매개변수를 주고 싶은데 바로 실행해 버린다 
+// 이떄 쓰는게 bind
+// bind사용법 함수.bind("param")
+
+var josh = {
+    name: "조성희",
+    exp: "진지",
+};
+
+
+btn.addEventListener("click",click.bind(josh,"사람"));
+
+
+// this (이것)
+// 자바스크립트 를 함수기반 언어인듯 보이지만 실제는 객체 지향 언어이다
+
+
+//this를 직접 제어 할수 있게 call, apply, bind를 만들어줌 [중요]
+
+
+function fthis(pArg, pArg2){   // 함수 선언 -> window 객체의 메소드 선언
+    console.log("this",this, "매개변수",pArg,pArg2); // window
+    // window 가 최상위 객체라 fthis는 window 객체에 속해있기 때문
+}
+
+
+
+// fthis.call(josh);
+// fthis.call(document,"첫번쨰arg","두번째arg");
+// fthis.apply(josh, ["첫번쨰arg","두번째arg"]);  // call이랑 같은데 매개변수 넘기는거만 다름 무조건 배열에 담아서 1개로 보내야함
+
+
+// josh.merong = fthis; // 참조
+
+// this가 맥락(context)에 따라 달라짐
+// josh.merong();
+// window.fthis();
+
+// var ggg = "제이에스";   // 변수 선언
+// console.log(window.ggg);
+
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="sWord"> <input type="button" id="sBtn" value="이미지검색">
+    <br><br><hr><br>
+    <div id="disp"></div>
+    <script>
+        const sWord = document.querySelector("#sWord");
+        const sBtn = document.querySelector("#sBtn");
+        const disp = document.querySelector('#disp');
+
+        const preURL = "https://www.flickr.com/services/feeds/photos_public.gne?tags=";
+        const postURL = "&format=json";
+
+        sBtn.addEventListener("click",function(){
+            let word = sWord.value;
+            let realURL = `${preURL}${word}${postURL}`;
+            console.log("체크",realURL);
+
+            disp.innerHTML = "";
+            let myScript = document.createElement("script");
+            myScript.src = realURL;
+            document.head.appendChild(myScript);
+        });
+
+        // 호출하는 함수를 미리 만들기 멋진말로 JSONP(JSON Padding)이라 부름
+        function jsonFlickrFeed(pArg){
+            // console.log("체크", pArg);
+
+            let items = pArg.items;
+
+            for(let i=0; i<items.length; i++){
+                let imgUrl = items[i].media.m;
+                let imgTag = document.createElement("img");
+                imgTag.src = imgUrl;
+                imgTag.width = 200;
+                imgTag.height = 200;
+
+                // 위에는 메모리상에 만든거라 보이지 않음 그래서 문서에 넣어야함
+                //append 는 실시간 문제가 있어 잘 안씀 그래서 
+                // appendChild많이씀
+                disp.appendChild(imgTag);   // 실제 document에 추가
+            }
+        }
+
+    </script>
+</body>
+<!--스크립트 자체는 한번로드되면 안바뀐다. -->
+<script src="https://www.flickr.com/services/feeds/photos_public.gne?tags=eclipse&format=json"></script>
+</html>
