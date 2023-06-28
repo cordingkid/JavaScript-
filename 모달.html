@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+#myModal{
+    position: fixed; /* 위치 고정 */
+    left: 0px;
+    top: 0px;
+    width: 100vw; /* 사이즈 고정 */
+    height: 100vh;
+    background-color: rgba(12, 12, 12, 0.5);
+    z-index: 100;   /* 클 수록 앞으로 나옴 */
+    display: none;
+}
+#content{
+    width: 60%;
+    height: 70%;
+    margin: 20px auto;
+    background-color: aquamarine;
+}
+#menu{
+    text-align: right;
+    font-size: 2em;
+}
+#menu button{
+    font-size: 2em;
+}
+
+</style>
+</head>
+<body>
+    <!-- 부트스트램 모달 X 개발자라면 만들어 써야함 -->
+    <!-- position, z-index, display, overflow, transform -->
+
+    <div id="myModal">
+        <div id="content">
+            <div id="menu"><button onclick="fmodalClose()">X</button></div>
+            <div><h1>난 최고의 프로그래머</h1></div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <button></button>
+    </div>
+    <button onclick="fmoalOpen()">모달창 버튼</button>
+
+</body>
+<script>
+    const mMoadl = document.querySelector("#myModal");
+    function fmoalOpen(){
+        mMoadl.style.display = "block";
+    }
+
+    function fmodalClose(){
+        mMoadl.style.display = "none";
+    }
+    
+
+    document.addEventListener("keyup",function(e){
+        let key = e.key;
+        if(key ==="Escape"){
+            // console.log(key);
+            fmodalClose();
+        }else{
+            return false;
+        }
+    })
+</script>
+</html>

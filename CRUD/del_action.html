@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="./jsp.js"></script>
+<script>
+    let num = request.getParameter("n_num");
+    
+    let tblName = "uglyGesi";
+    let dataArr = JSON.parse(localStorage.getItem(tblName));
+
+    console.log(dataArr);
+
+    for(let i=0; i<dataArr.length; i++){
+        if(dataArr[i].num == num){
+            dataArr.splice(i,1);
+            break;
+        }
+    }
+
+    console.log(dataArr);
+    localStorage.setItem(tblName, JSON.stringify(dataArr));
+
+    alert("정상적으로 글이 삭제 되었습니다.")
+    location.replace("list.html");
+</script>

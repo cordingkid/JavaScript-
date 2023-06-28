@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="./jsp.js"></script>
+<script>
+    let num = request.getParameter('n_num');
+    let title = request.getParameter('n_title');
+    let cont = request.getParameter('n_cont');
+
+    // 배열
+    let skills = request.getParameterValues('n_skill');
+    let date = (new Date()).toLocaleDateString();
+
+    const tblName = "uglyGesi";
+    let dataArr = JSON.parse(localStorage.getItem(tblName));
+
+    for(let i=0; i<dataArr.length; i++) {
+        if(dataArr[i].num == num){
+            dataArr[i].title = title;
+            dataArr[i].cont = cont;
+            dataArr[i].skills = skills;
+            dataArr.date = date;
+            break;
+        }   
+    }
+
+    // 로컬 스토리지에 다시 저장 (위에는 메모리상 변경인거여서)
+    localStorage.setItem(tblName, JSON.stringify(dataArr));
+
+    alert("정상적으로 글이 수정 되었습니다.");
+    location.replace("list.html");
+</script>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#tabs{
+    width: 500px;
+    height: 600px;
+    position: relative;
+    border: 1px solid black;
+}
+.tab{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: beige;
+    color: blueviolet;
+    font-size: 2em;
+}
+</style>
+</head>
+<body>
+    <button onclick="ftab(0)">tab1</button>
+    <button onclick="ftab(1)">tab2</button>
+    <button onclick="ftab(2)">tab3</button>
+    <div id="tabs">
+        <div class="tab" style="z-index: 999;"><h1>첫번째 탭</h1></div>
+        <div class="tab"><h1>두번째 탭</h1></div>
+        <div class="tab"><h1>세번째 탭</h1></div>
+    </div>
+</body>
+<script>
+    const myTabs = document.querySelectorAll(".tab");
+    // 모든 텝 인덱스 초기화
+    const btn = document.querySelectorAll("button");
+
+    function finitTab(){
+        for(let i = 0; i < myTabs.length; i++){
+            myTabs[i].style.zIndex = 1;
+            btn[i].style.borderBottom = "10px solid black";
+        }
+    }
+    function ftab(pNum){
+        finitTab();
+        myTabs[pNum].style.zIndex = 999;
+        // event.target.style.borderBottom = "10px solid black";
+        btn[pNum].style.borderBottom = "10px solid black";
+    }
+</script>
+</html>

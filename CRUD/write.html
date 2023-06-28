@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div id="wrapper">
+        <!--  -->
+        <form action="write_action.html" method="get">
+            <h1>JS와 LS로 만드는 게시판</h1>
+            제목 <input type="text" name="n_title" value="" required><br>
+            작성자 <input type="text" name="n_writer" value="" required><br>
+            내용 <br>
+            <textarea name="n_cont" cols="30" rows="10" required></textarea><br>
+            관련 언어 (3개까지만 선택)<br>
+            JS<input type="checkbox" name="n_skill" value="js" checked onclick="f3ck(this)">
+            Java<input type="checkbox" name="n_skill" value="java" onclick="f3ck(this)">
+            Oracle<input type="checkbox" name="n_skill" value="oracle" onclick="f3ck(this)">
+            HTML<input type="checkbox" name="n_skill" value="html" onclick="f3ck(this)">
+            CSS<input type="checkbox" name="n_skill" value="css" onclick="f3ck(this)"><br>
+            <button type="submit">제출</button> &nbsp;&nbsp; <button type="submit">리셋</button>
+        </form>
+    </div>
+</body>
+<script>
+    const maxCnt = 3;
+    let curCnt = document.querySelectorAll("input[type=checkbox]:checked").length;
+
+    var ckb = document.querySelectorAll("input[type=checkbox]");
+
+    function f3ck(pThis){
+        if(pThis.checked){
+            curCnt++;
+        }
+        
+        if(!pThis.checked){
+            curCnt--;
+        }
+        
+        if(curCnt > maxCnt){
+            pThis.checked = false;
+            curCnt--;
+        }
+        console.log(curCnt);
+    }
+</script>
+</html>

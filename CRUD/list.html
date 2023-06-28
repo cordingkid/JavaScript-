@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>로컬스토리지</title>
+<style>
+    #modal{
+        position: fixed;
+        left: 0px; top: 0px;
+        width: 100vw; height: 100vh;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: none;
+    }
+    #mCont{
+        width: 60%;
+        height: 70%;
+        margin: 50px auto;
+        background-color: white;
+        padding: 20px;
+    }
+    .mClose{
+        margin-left: 99%;
+        text-decoration: none;
+    }
+    .pageInx{
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+    <div id="modal">
+        <div id="mCont">
+            <a href="" onclick="mClose()" class="mClose">X</a>
+            <form method="get">
+                <h1>JS와 LS로 만드는 게시판</h1>
+                <!--사용자에겐 보여줄 필요가 없는데 프로그램상 필요한 값 hidden 사용-->
+                <input type="hidden" name="n_num" value="">
+                제목 <input type="text" name="n_title" value=""><br>
+                작성자 <input type="text" name="n_writer" value="" disabled><br>
+                내용 <br>
+                <textarea name="n_cont" cols="30" rows="10"></textarea><br>
+                관련 언어 (3개까지만 선택)<br>
+                JS<input type="checkbox" name="n_skill" value="js" checked onclick="f3ck(this)">
+                Java<input type="checkbox" name="n_skill" value="java" onclick="f3ck(this)">
+                Oracle<input type="checkbox" name="n_skill" value="oracle" onclick="f3ck(this)">
+                HTML<input type="checkbox" name="n_skill" value="html" onclick="f3ck(this)">
+                CSS<input type="checkbox" name="n_skill" value="css" onclick="f3ck(this)"><br>
+                <button type="submit" onclick="fsubmit('mod')">수정</button> &nbsp;&nbsp; 
+                <button type="submit" onclick="fsubmit('del')">삭제</button>
+            </form>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div id="list"></div>
+    </div>
+    <script src="./jsp.js"></script>
+</body>
+<script>
+    // 페이지 나누기
+
+    /*
+        페이지당 몇 개글 출력
+        전체 글수
+        페이지 수
+        페이지별로 시작 인덱스(글), 끝 인덱스(글) 배열에 담아져 있기 때문에
+    */
+
+    const tblName = "uglyGesi";
+    let dataArr = JSON.parse(localStorage.getItem(tblName));
+
+    let page = request.getParameter("page");
+    if(!page){ // 자바스크립트 null은 false이다.
+        page = 1;
+    }
+
+    const cntPerPage = 10; // 10개 씩 출력
+    let totalGulCnt = dataArr.length; // 전체 글수
+    let pageCnt = Math.ceil(totalGulCnt / cntPerPage);  // 전체 글수 / cntPerPage 를 올림
+    let startGuInx = (page - 1) * cntPerPage;
+    let endGuInx = startGuInx + cntPerPage; // 반복문에 < 쓸거라 -1 필요없음
+    if(endGuInx > (totalGulCnt-1)){
+        endGuInx = totalGulCnt;
+    }
+
+    // console.log(pageCnt); 
+
+
+    const myModal = document.querySelector("#modal");
+    // 로컬 스토리지 테이블 키 값
+    const gList = document.querySelector("#list");
+    // 데이터 배열
+
+
+    // forms 라는걸로 form 을 찾는다 반환값은 배열이기떄문에 0번쨰걸 찾아준다.
+    const myForm = document.forms[0];
+    
+    function fsubmit(pAct){
+        event.preventDefault(); // submit의 built-in 기능(전송) 막기
+
+        if(pAct == 'mod'){
+            myForm.action = `modify_action.html`;
+        }
+
+        if(pAct == 'del'){
+            if(confirm("해당 글을 삭제 하시겠습니까?")){
+                myForm.action = `del_action.html`;
+            }else{
+                return false;
+            }
+        }
+
+        myForm.submit();
+    }
+    
+    function fread(pNum){
+        // built-in 기능 막기 위한 거
+        event.preventDefault();
+        // console.log(pNum);
+        document.querySelector("[name=n_num]").value = pNum;
+        myModal.style.display = "block";
+        for(let i=0; i<dataArr.length; i++){
+            if(dataArr[i].num == pNum){
+                document.querySelector("[name=n_title]").value = dataArr[i].title;
+                document.querySelector("[name=n_writer]").value = dataArr[i].writer;
+                document.querySelector("[name=n_cont]").value = dataArr[i].cont;
+                
+                // 체크박스
+                let ckArr = dataArr[i].skills;
+                for(let j=0; j<ckArr.length; j++){
+                    document.querySelector(`input[value=${ckArr[j]}]`).checked = true;
+                }
+                
+                // break 하는게 중요 성능 향상가능
+                break;
+            }
+        }
+        curCnt = document.querySelectorAll("form input[type=checkbox]:checked").length;
+        console.log(curCnt);
+    }
+    
+
+    function fList(){
+        let tblStr = `<table border="1">
+                        <tr>
+                            <th>No.</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>등록일자</th>
+                        </tr>`;
+        for(let i = startGuInx; i < endGuInx; i++) {
+            // if(!dataArr[i]) break; // for문이 end인덱스 까지 도는데 마지막 페이지에 end인덱스까지의 데이터가 없을수 있으니까 null 이면 for문 중지
+            tblStr += `<tr>
+                        <td>${dataArr[i].num}</td>
+                        <td><a href="#" onclick="fread('${dataArr[i].num}')">${dataArr[i].title}</a></td>
+                        <td>${dataArr[i].writer}</td>
+                        <td>${dataArr[i].date}</td>
+                    </tr>`
+        }
+        tblStr += `</table><br>`;
+        
+        // 페이지 번호 출력하기
+        let pageStr = "";
+        for(let i = 1; i <= pageCnt; i++){
+            pageStr += `<a href="?page=${i}" class="pageInx" style="color: gray;">${i}</a>&nbsp;&nbsp;`;
+        }
+        tblStr += pageStr; // 페이지 출력 리스트 추가
+        tblStr += `<hr><br><a href="write.html">글쓰기</a>`;
+        gList.innerHTML = tblStr;
+    }
+
+
+    // 태그 해석만 끝나면 발생 좀더 많이 쓴다.
+    window.addEventListener("DOMContentLoaded",function(){
+        fList();
+    });
+    // window.addEventListener("load",fList); 태그해석 + 이미지 로딩완료에발생
+
+
+    const maxCnt = 3;
+    let curCnt = 0;
+    
+
+    // var ckb = document.querySelectorAll("input[type=checkbox]");
+
+    function f3ck(pThis){
+        if(pThis.checked){
+            curCnt++;
+        }
+        
+        if(!pThis.checked){
+            curCnt--;
+        }
+        
+        if(curCnt > maxCnt){
+            pThis.checked = false;
+            curCnt--;
+        }
+        console.log(curCnt);
+    }
+
+    function mClose(){
+        myModal.style.display = "none";
+    }
+</script>
+</html>

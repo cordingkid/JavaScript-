@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    let stars = JSON.parse(localStorage.getItem("stars"));
+
+    for(let i=0; i<stars[4].huk.length; i++){
+        if(stars[4].huk[i] =="나"){
+            stars[4].huk[i] = "나나나";
+        }
+    }
+    localStorage.setItem("stars",JSON.stringify(stars));
+
+    console.log(stars);
+</script>

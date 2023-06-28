@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <tbody id="sujin">
+            <tr>
+                <th>이름</th>
+                <th onclick="ftest()">나이</th>
+                <th>별명</th>
+            </tr>
+            <tr>
+                <td>김민정</td>
+                <td>20</td>
+                <td>정민</td>
+            </tr>
+            <tr>
+                <td>박승우</td>
+                <td>10</td>
+                <td>우승</td>
+            </tr>
+            <tr>
+                <td>정은지</td>
+                <td>15</td>
+                <td>지은</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+<script>
+
+    // 유사배열을 배열로 변환하는 함수
+    function toArray(pArg){
+        var arr = [];
+        for(let i =1; i<pArg.length; i++){
+            arr.push(pArg[i]);
+        }
+        return arr;
+    }
+
+    const trs = toArray(document.querySelectorAll("tr"));
+    const ttbody = document.querySelector("tbody");
+
+    function ftest(){
+        console.log("ftest");
+        trs.sort(function(a,b){
+            return a.children[1].innerHTML - b.children[1].innerHTML;
+        });
+
+        for(let i=0; i<trs.length; i++){
+            // 이미 존재하는 객체를 appendChild하면 이동해 버림
+            // 잘 안쓰게 되면 동적 바인딩을 너무 많이 써야 해서, 이벤트 처리가 힘들어짐
+            ttbody.appendChild(trs[i]);
+        }
+    }
+</script>
+</html>

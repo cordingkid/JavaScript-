@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    /*
+    //localStorage. 요즘은 cookie 대신 많이 사용(용량동 넉넉, 사용법도 쉬움)
+    localStorage.setItem("로컬","storage");
+    localStorage.setItem("로컬","noUseCookie");
+
+    console.log(localStorage.getItem("로컬"));
+
+    localStorage.setItem("저장","로컬스토리지");
+    console.log(localStorage.length); // 3개 덮어씌우더라도 갯수는 안주는듯?
+    localStorage.removeItem("저장");
+    console.log(localStorage.length); // 3개 덮어씌우더라도 갯수는 안주는듯?
+
+    // 저장 순서가 보장되지 않아서 잘안씀
+    console.log(localStorage.key(0));    // 키 값 읽어오기(잘안씀)
+
+    // 다 지우기
+    localStorage.clear();
+    console.log("다 지우고 나서 로컬 저장소 크기 : "+localStorage.length);
+    */
+
+
+    /*
+    //  setItem 매소드와 같은 효과
+    localStorage.fbi = "FBI";    
+
+    // getItem
+    console.log(localStorage.fbi);
+
+    // removeItem
+    delete localStorage.fbi;
+    */
+
+   // [중요] : localStorage는 문자열만 저장가능 -> 객체를 그대로 저장하지 못함
+    // 객체를 문자열화 해서 저장해야함
+/*
+   let testObj = {name:"진현성",ment:"이름어려움"};
+
+   localStorage.setItem("jhs",JSON.stringify(testObj));
+
+   let readData = JSON.parse(localStorage.getItem("jhs"));
+
+   console.log(readData.ment);
+  */ 
+
+
+    // 배열(객체) 자동 실행되는 toString 메소드에 속으면 안됨
+    localStorage.clear();
+    // let testArr = [2,5,7,9];
+    // localStorage.setItem("test",JSON.stringify(testArr));
+
+    // console.log(JSON.parse(localStorage.getItem("test"))[2]);
+
+    // 실제 만히 사용되는 방식(객체 지향 DB처럼 사용 -> MongoDB와 거의 유사한 방식)
+    
+    let dataArr = [];
+
+    for(let i=1; i<=10; i++){
+        let myStar = {};
+        myStar.name = "내 스타" + i;
+        myStar.age = Math.floor(Math.random() * 20) + 20;
+
+        if(i==5){
+            myStar.huk = ["가","나","다"];
+        }
+        dataArr.push(myStar);
+    }
+
+    
+    // localStorage에 저장!
+    localStorage.setItem("stars", JSON.stringify(dataArr));
+
+
+
+
+</script>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="./jsp.js"></script>
+<script>
+
+
+    // let title = location.href.split("?")[1].split("&")[0].split("=")[1]; 이건쓸수 없다.
+
+
+    /*
+                    옛날        조금옜날        요즘꺼
+    인코딩 함수    escape       encodeURI   encodeURIComponent
+    디코딩 함수    unescape     decodeURI   decodeURIComponent
+    */
+
+    
+    // console.log(request.getParameterValues("n_skill"));
+    // console.log(request.getParameter("n_skill"));
+
+    // console.log(request.getParameter("n_title"));
+    // console.log(request.getParameter("n_writer"));
+    // console.log(request.getParameter("n_cont"));
+
+    // console.log(getParameter("n_cEnt"));
+    let title = request.getParameter("n_title");
+    let writer = request.getParameter("n_writer");
+    let cont = request.getParameter("n_cont");
+    let skills = request.getParameterValues("n_skill");
+
+    // (관계형 DB로 보자면 1개 row)
+    let gul = {
+        num : 0, // primary key
+        title: title,
+        writer: writer,
+        cont: cont,
+        skills: skills,
+        date: (new Date()).toLocaleDateString()
+    };
+
+    // localStorage에 저장
+    const tblName = "uglyGesi";
+    let dataArr = []; // 그냥 선언, 빈 배열 (값이 없는 경우에 쓸 예정)
+
+    if(localStorage.getItem(tblName)){
+        dataArr = JSON.parse(localStorage.getItem(tblName));
+        gul.num = dataArr[dataArr.length -1].num + 1;
+    }
+    dataArr.push(gul);  // 배열에추가
+
+    localStorage.setItem(tblName,JSON.stringify(dataArr));
+
+    alert("게시글이 정상적으로 등록되었습니다.");
+
+    // location.href 이건 캐시가 있으면 서버에 요청안하고 그냥 보여줄수도있다.
+
+    // replace는 항상 서버에 요청한다.
+    location.replace("list.html");
+</script>

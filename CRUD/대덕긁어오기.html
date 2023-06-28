@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 서버가 없으면 플러그인이 있어야한다. (ajax cross origin 문제)
+var contents = [];
+var xhr = new XMLHttpRequest();
+xhr.open('GET','https://www.ddit.or.kr/review?page=1',false);  //일단 일부러 동기처리
+xhr.onreadystatechange = function(){
+    if( xhr.readyState == 4 && xhr.status == 200 ){
+        let schRegExp = new RegExp('<p class="review_con">.*</p>','g');
+        // match 매소드 하면 일치하는게 배열로 나온다.
+        let schRslt = xhr.responseText.match(schRegExp);
+        // console.log("schRslt",schRslt);
+        for(let i=0; i<schRslt.length; i++){
+            contents.push(schRslt[i].replace('<p class="review_con">',"").replace("</p>",""));
+        }
+        console.log("contents",contents);
+    }
+}
+xhr.send();
+</script>
