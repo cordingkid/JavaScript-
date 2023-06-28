@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #disp{
+            width: 200px;
+            height: 200px;
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지 미리보기</h1>
+    <div id="disp" ondragover="fdover()" ondrop="fdrop()"></div>
+    
+    <script>
+        const disp = document.querySelector("#disp");
+        function fdover() {
+            event.preventDefault();
+        }
+
+        // 비동기가 반복문 속에 있는 건 아주 좋지 않다.
+        // 비동기 활동을 별도 함수로 뽑아 내서 독립시키고, 이를 반복문 안에서 부르면, 구별됨
+
+        function oneFileRead(pFile){
+            var fileReader = new FileReader(); // 파일 읽어주는 객체 생성
+
+            fileReader.onload = () => { // 다 읽으면 발생하는 이벤트
+            // console.log("파일 읽은 결과 ", fileReader.result);
+                var vDiv = document.createElement("div");
+                vDiv.style.width = "100px";
+                vDiv.style.height = "100px";
+
+                var vImg = document.createElement("img");
+                vImg.width = 100; 
+                vImg.height = 100;
+                vImg.src = fileReader.result;
+
+                vDiv.appendChild(vImg);
+                vDiv.innerHTML += pFile.name;
+
+                disp.appendChild(vDiv);
+            }
+            fileReader.readAsDataURL(pFile);
+        }
+        
+        
+        function fdrop(){
+            event.preventDefault();
+            // console.log(event.dataTransfer.files);
+            
+            var files = event.dataTransfer.files;
+            // 파일 읽기 -> 이건 항상 거의 세팅으로 봐도됨
+            // console.log(file);
+            
+            disp.innerHTML = "";
+            for(var i=0; i < files.length; i++) {
+                // 함수로 따로 빼서 메모리 충돌 날일이 없다.
+                oneFileRead(files[i]);
+            }
+        }
+
+        // 다른곳도 막아야함
+        window.addEventListener("dragover",() => {
+            event.preventDefault();
+        });
+        window.addEventListener("drop",() => {
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html>
