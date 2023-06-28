@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>infinite scroll</title>
+<style>
+.title{
+    text-transform: uppercase;
+}
+</style>    
+</head>
+<body>
+    <h1 class="title">infinite scroll</h1>
+</body>
+<script>
+    var data = 0;
+    for(let i = 0; i <= 30; i++){
+        document.write(`<h2>무한스크롤</h2>`);
+    }
+
+    // window.scrollTo(x좌표, y좌표)
+    // 약간의 시간을 줘서 마지막에 실행되게함
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 50);
+
+    // 스크롤 이벤트
+    window.onscroll = () => {
+        let scrollTop = document.documentElement.scrollTop;
+        let clientHeight = document.documentElement.clientHeight;
+        let scrollHeight = document.documentElement.scrollHeight;
+
+        // 스크롤바를 끝까지 내렷다면 ( 브라우저가 좋아져서 소숫점 때문에 미세한 오차 발생가능 )
+        // scrollTop + clientHeight == scrollHeight 가 되어야함
+        // 실제는 약간의 튜닝값을 넣어서 끝까지 내리기 이전에 필요한 처리를 함
+
+        const tunningVal = 50; // 50px 전에 발생 시키려 함
+        if(( scrollTop + clientHeight ) >= ( scrollHeight - tunningVal )){
+            if(data == 10) return false; // 임의로 데이터 8개씩 10번만 가져오게 하기 위체 데이터 0으로 초기화
+            data++;
+            // console.log("스크롤바 끝까지 내림");
+            // 실제로 여기에 오는건 대부분 ajax 로 가져오기
+            for(let i = 1; i <= 8; i++){
+                var h2 = document.createElement("h2");
+                h2.innerHTML = "-- 무한스크롤 페이징 --";
+                document.body.appendChild(h2);
+            }
+        }
+        
+    }
+</script>
+</html>

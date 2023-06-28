@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>infiniteScroll</title>
+    <style>
+        .title {
+            text-transform: uppercase;
+        }
+        #disp{
+            border: 1px solid black;
+            height: 400px;
+            overflow: auto;
+        }
+        table{
+            text-align: center;
+        }
+
+        /* 스크롤바의 폭 너비 */
+        #disp::-webkit-scrollbar {
+            width: 10px;  
+        }
+
+        #disp::-webkit-scrollbar-thumb {
+            background: rgb(107, 20, 220); /* 스크롤바 색상 */
+            border-radius: 10px; /* 스크롤바 둥근 테두리 */
+        }
+
+        #disp::-webkit-scrollbar-track {
+            background: rgba(97, 20, 220, 0.1);  /*스크롤바 뒷 배경 색상*/
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">dom 무한스크롤 걸기</h1>
+    <div id="disp">
+        <script>
+            var tblStr = `<table border="1">
+                            <tbody id="tbody">
+                                <tr>
+                                    <th>이름</th><th>성격</th>
+                                </tr>`;
+            for(let i=1; i<=20; i++){
+                tblStr += `<tr>
+                             <td>사람</td><td>인자강${i}</td>
+                           </tr>`;
+            }
+            tblStr += `</tbody></table>`;
+            document.write(tblStr);
+        </script>
+    </div>
+</body>
+<script>
+    const disp = document.querySelector("#disp");
+    const tbody = document.querySelector("tbody");
+    function fchk(){
+        var scrollTop = disp.scrollTop;
+        var clientHeight = disp.clientHeight;
+        var scrollHeight = disp.scrollHeight;
+
+
+        var tunningVal = 50;
+        if((scrollTop + clientHeight) >= (scrollHeight - tunningVal)){
+            for(let i = 1; i <= 10; i++){
+                let tr = document.createElement("tr");
+                tr.innerHTML = `<td>지나가는시만${i}</td><td>뭐요</td>`
+                tbody.appendChild(tr);
+            }
+        }
+    }
+
+    disp.addEventListener("scroll",() =>{
+        fchk();
+    });
+</script>
+</html>
