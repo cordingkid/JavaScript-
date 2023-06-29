@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1" onclick="fclick1(this)">이벤트등록법1</button>
+    <button id="btn2"><span>이벤트등록법2</span></button>
+    <button id="btn3">이벤트등록법3</button>
+</body>
+<script>
+    const btn2 = document.querySelector("#btn2");
+    const btn3 = document.querySelector("#btn3");
+
+
+    btn3.addEventListener("click",() => {
+        console.log("3번 버튼");
+    });
+     
+    function fclick3(){
+        console.log("나도 3번 버튼");
+    }
+
+    btn3.addEventListener("click", fclick3);
+
+
+    function fclick1(pThis) { // 이렇게 쓰는걸 권장하지는 않는다
+        console.log("기본" + pThis.innerHTML);
+        console.log("기본" + pThis.id);
+    }
+
+    // 이벤트 등록법 2번 덮어쓰게 된다.
+    btn2.onclick = function(){
+        console.log("나도 두번쨰 버튼");
+    }
+
+    function fclick2() { //
+        // target vs currentTarget 을 꼭 구분해서 쓰기 엄청난 실수를 야기 가능
+
+        // 코드 안에 다른걸 쓰면 계속 바뀌게 된다.
+        console.log(event.target);
+
+        // 무조건 이벤트 걸어주는 친구
+        console.log(event.currentTarget);
+    }
+
+    btn2.onclick = fclick2;
+</script>
+</html>

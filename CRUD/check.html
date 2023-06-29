@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+    // 랜덤 내용 가져오는 부분
+    const contents = [];
+    function getContents(pPage){
+        console.time("타임체크"); // 라벨명을 같이 줘야한다.
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET',`https://www.ddit.or.kr/review?page=${pPage}`,true);  //일단 일부러 동기처리
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status == 200){
+                let schRegExp = new RegExp('<p class="review_con">.*</p>','g');
+                let schRslt = xhr.responseText.match(schRegExp);
+                for(let i=0; i<schRslt.length; i++){
+                    contents.push(schRslt[i].replace('<p class="review_con">',"").replace("</p>",""));
+                }
+            // console.log(contents);
+            console.timeEnd("타임체크");
+            }
+        }
+        xhr.send();
+    }
+
+    (function(){
+        console.time("반복시간");
+        for(let i=1;i<=12;i++){
+            getContents(i);
+        }
+        // 비동기를 쓰는 순간 사용자가 느끼는 실행시간은 엄청나게 빠르게 느껴진다!
+        console.timeEnd("반복시간");
+    })();
+</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #grand{
+            width: 300px;
+            height: 300px;
+            border: 3px solid black;
+        }
+        #mother{
+            width: 200px;
+            height: 200px;
+            border: 3px solid pink;
+            position: relative; /* ?바꾸겟다? */
+            left: 50px;
+        }
+        #me{
+            width: 100px;
+            height: 100px;
+            border: 3px solid magenta;
+            position: relative;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="grand" onclick="fgrand()">할머니
+        <div id="mother" onclick="fmom()">엄마
+            <div id="me" onclick="fme()">나</div>
+        </div>
+    </div>
+</body>
+<script>
+
+    // 이벤트 버블링
+    function fgrand(){
+        console.log("아는 할머니의");
+    }
+
+    function fmom(){
+        event.stopPropagation(); // 중요
+        console.log("아는 엄마의");
+    }
+
+    function fme(){
+        /*
+        
+        event.preventDefault(); 이건 꼭 알아야함
+
+        밑에는 조금 꼭 알아야함
+        event.target
+        event.currentTarget
+        */
+        event.stopPropagation(); // 중요 이벤트 캡쳐링
+        console.log("아는 형님이요~");
+    }
+</script>
+</html>

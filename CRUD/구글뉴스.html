@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+</head>
+<body>
+    <input type="text" name="" id="scWord" onkeydown="fEnter()">
+    <button onclick="fgoogle()">구글뉴스 xml</button>
+    <div id="disp"></div>
+</body>
+<script>
+    function fEnter(){
+        // ev1
+        // fgoogle();
+        if(event.keyCode === 13){
+            fgoogle();
+        }
+    }
+    // Create x2js instance with default config
+    var x2js = new X2JS();
+    
+    
+    // 구글이 막아놓아서 무료 우회 서비스를 해주는 사이트(보통 이런걸 proxy라 부름)
+    const disp = document.querySelector("#disp");
+    function fgoogle(){
+        let scWord = document.querySelector("#scWord").value;
+        if(scWord == null || scWord == ""){
+            scWord = "개발자";
+        }
+        let url = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://news.google.com/rss/search?q=${scWord}&hl=ko&gl=KR&ceid=KR:ko`)}`;
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", url, true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                // 내용 가져오기
+                let xmlStr = JSON.parse(xhr.responseText).contents;
+                
+                // xml을 json으로 변환 
+                var jsonObj = x2js.xml_str2json( xmlStr );
+                
+                // 필요한 부분만 가져오기
+                var news = jsonObj.rss.channel.item;
+                console.log(news);
+                var tblStr = `<table border="1">
+                    <tr>
+                        <th>뉴스제목</th>    
+                        <th>발행일</th>    
+                        </tr>`;
+                        for(let i = 0; i < news.length; i++){
+                            tblStr += `<tr>
+                                <td><a href="${news[i].link}">${news[i].title}</a></td>
+                                <td>${news[i].pubDate}</td>
+                                </tr>`;
+                            }
+                            tblStr += `</table>`;
+                            disp.innerHTML = tblStr;
+                        }
+                    }
+        xhr.send();
+    }
+</script>
+</html>
