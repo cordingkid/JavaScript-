@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/gridstack@8.2.1/dist/gridstack.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gridstack@8.2.1/dist/gridstack-all.js"></script>
+<style>
+.grid-stack {
+    background: lightgoldenrodyellow;
+}
+
+.grid-stack-item-content {
+    color: #2c3e50;
+    text-align: center;
+    background-color: #18bc9c;
+}
+
+#myModal{
+    position: fixed; /* 위치 고정 */
+    left: 0px;
+    top: 0px;
+    width: 100vw; /* 사이즈 고정 */
+    height: 100vh;
+    background-color: rgba(12, 12, 12, 0.5);
+    z-index: 100;   /* 클 수록 앞으로 나옴 */
+    display: none;
+}
+#content{
+    width: 60%;
+    height: 70%;
+    margin: 20px auto;
+    background-color: whitesmoke;
+}
+#menu{
+    text-align: right;
+    font-size: 2em;
+}
+#menu button{
+    font-size: 2em;
+}
+</style>
+</head>
+<body>
+    <div id="myModal">
+        <div id="content">
+            <div id="menu"><button onclick="fmodalClose()">X</button></div>
+            <hr>
+            <div class="mFooter">
+                <button id="mfBtn">저장하기</button>
+            </div>
+            <br>
+            <div class="checkBox">
+                <label><input type="checkbox" class="pCheck" id="pCheck1">1번포틀릿</label>
+                <label><input type="checkbox" class="pCheck" id="pCheck2">2번포틀릿</label>
+                <label><input type="checkbox" class="pCheck" id="pCheck3">3번포틀릿</label>
+                <label><input type="checkbox" class="pCheck" id="pCheck4">4번포틀릿</label>
+                <label><input type="checkbox" class="pCheck" id="pCheck5">5번포틀릿</label>
+                <label><input type="checkbox" class="pCheck" id="pCheck6">6번포틀릿</label>
+            </div>
+            <div class="layout"></div>
+        </div>
+    </div>
+
+    <button onclick="fmoalOpen()">모달창 버튼</button>
+
+    <!--=====================================================================-->
+
+    <h1>어펜드 차일드 연습</h1>
+    <p style="color: green;">어펜드 차일드는 문서에 있으면 추가되는게 아니라 순서가 바뀐다. 처음알앗음</p>
+    <button id="btn">이거 누르면 어펜드 차일드 됨</button>
+    <div class="container">
+        <div class="grid-stack">
+            <div class="grid-stack-item item portlet1" gs-w="3" gs-h="2">
+                <div class="grid-stack-item-content">
+                    <div>
+                        <h3>공지사항 게시판</h3>
+                        <table border="1" style="text-align: center;">
+                            <tr>
+                                <th>제목</th>
+                                <th>작성일</th>
+                                <th>조회수</th>
+                            </tr>
+                            <tr>
+                                <td>성희 누나 키보드 좋다.</td>
+                                <td>2023.06.13</td>
+                                <td>1.3K</td>
+                            </tr>
+                            <tr>
+                                <td>젼이 누나 그만좀 때려요</td>
+                                <td>2023.06.12</td>
+                                <td>2.3K</td>
+                            </tr>
+                            <tr>
+                                <td>그리드스택어렵다</td>
+                                <td>2023.06.13</td>
+                                <td>2.3K</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-stack-item item portlet2" gs-w="3" gs-h="2">
+                <div class="grid-stack-item-content">
+                    <div>
+                        <h3>스터디 그룹</h3>
+                        <table border="1" style="text-align: center;">
+                            <tr>
+                                <th>방이름</th>
+                                <th>등록일</th>
+                                <th>회원수</th>
+                            </tr>
+                            <tr>
+                                <td>정수의 스터디 그룹</td>
+                                <td>2023.05.12</td>
+                                <td>6명</td>
+                            </tr>
+                            <tr>
+                                <td>영우의 필라테스</td>
+                                <td>2023.06.01</td>
+                                <td>23명</td>
+                            </tr>
+                            <tr>
+                                <td>성희의 영어과외</td>
+                                <td>2022.03.07</td>
+                                <td>36명</td>
+                            </tr>
+                            <tr>
+                                <td>재균의 당구학개론</td>
+                                <td>2022.07.28</td>
+                                <td>13명</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-stack-item item portlet3" gs-w="3" gs-h="2">
+                <div class="grid-stack-item-content">
+                    <div>
+                        <h3>스터디 그룹2</h3>
+                        <table border="1" style="text-align: center;">
+                            <tr>
+                                <th>방이름</th>
+                                <th>등록일</th>
+                                <th>회원수</th>
+                            </tr>
+                            <tr>
+                                <td>정수의 스터디 그룹</td>
+                                <td>2023.05.12</td>
+                                <td>6명</td>
+                            </tr>
+                            <tr>
+                                <td>영우의 필라테스</td>
+                                <td>2023.06.01</td>
+                                <td>23명</td>
+                            </tr>
+                            <tr>
+                                <td>성희의 영어과외</td>
+                                <td>2022.03.07</td>
+                                <td>36명</td>
+                            </tr>
+                            <tr>
+                                <td>재균의 당구학개론</td>
+                                <td>2022.07.28</td>
+                                <td>13명</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-stack-item item portlet4" gs-w="3" gs-h="3">
+                <div class="grid-stack-item-content">
+                    <div>
+                        <h3>시간표</h3>
+                        <table border="1" style="text-align: center;">
+                            <tr>
+                                <th></th>
+                                <th>월</th>
+                                <th>화</th>
+                                <th>수</th>
+                                <th>목</th>
+                                <th>금</th>
+                            </tr>
+                            <tr>
+                                <td>1교시</td>
+                                <td>데이터베이스</td>
+                                <td rowspan="4"></td>
+                                <td rowspan="2"></td>
+                                <td>데이터베이스</td>
+                                <td rowspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td>2교시</td>
+                                <td>데이터베이스</td>
+                                <td>데이터베이스</td>
+                            </tr>
+                            <tr>
+                                <td>3교시</td>
+                                <td rowspan="4"></td>
+                                <td>HTML</td>
+                                <td>데이터베이스</td>
+                            </tr>
+                            <tr>
+                                <td>4교시</td>
+                                <td>HTML</td>
+                                <td rowspan="5"></td>
+                            </tr>
+                            <tr>
+                                <td>5교시</td>
+                                <td>스프링</td>
+                                <td rowspan="3"></td>
+                                <td>DJANGO</td>
+                            </tr>
+                            <tr>
+                                <td>6교시</td>
+                                <td>스프링</td>
+                                <td>DJANGO</td>
+                            </tr>
+                            <tr>
+                                <td>7교시</td>
+                                <td>스프링</td>
+                                <td>스프링</td>
+                                <td>DJANGO</td>
+                            </tr>
+                            <tr>
+                                <td>8교시</td>
+                                <td>스프링</td>
+                                <td>스프링</td>
+                                <td>파이썬</td>
+                                <td>드론쇼</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-stack-item item portlet5" gs-w="2">
+                <div class="grid-stack-item-content">
+                    <div>
+                        <h3>왓 타임 이짓 나우?</h3>
+                        <div>
+                            <h4 id="whatTimeIsItNow">
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-stack-item item portlet6" gs-w="2">
+                <div class="grid-stack-item-content">
+                    <div>
+                        <h3>날씨</h3>
+                        <div>
+                            <h4>현재 날씨 맑은듯 안맑은듯?</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var options = { // 여기에 그리드 스택 옵션 삽입
+        disableOneColumnMode: true, // jfidle 작은 창 크기용
+        float: false,
+        removable: "#trash", // drag-out delete class
+        removeTimeout: 100
+    };
+    var grid = GridStack.init(options);
+    const btn = document.querySelector("#btn");
+    const regex = /[^0-9]/g;
+    var portletSeq = "";
+
+    // 포틀렛 예시
+    var dataBasePortlet = "251643";
+    // var myPortlet = ["2","5","1","6","4","3"];
+    var myPortlet = dataBasePortlet.split("");
+    // console.log(myPortlet);
+
+    btn.addEventListener("click", () => {
+        console.log("클릭");
+
+        // 컨테이너
+        var container = document.querySelector(".grid-stack");
+
+        // 클래스 item 을 가지고 있는 포틀렛 배열
+        var item = document.querySelectorAll(".item");
+        console.log(item);
+        // console.log(myPortlet);
+
+        for(let i =0; i<myPortlet.length; i++){
+            for(let j=0; j<item.length; j++){
+                let stack = item[j];
+                // console.log(stack);
+                let stackNum = stack.className;
+                // console.log(stackNum);
+                stackNum = stackNum.replaceAll(regex, "");
+                // console.log(stackNum);
+                if(myPortlet[i] == stackNum){
+                    portletSeq += stackNum;
+                    container.appendChild(stack);
+                    break;
+                }
+            }
+        }
+    });
+</script>
+<script>
+    // 체크박스 
+    var pCheck = document.querySelectorAll(".pCheck");
+
+    var checkBox = document.querySelector(".checkBox");
+
+    const layout = document.querySelector(".layout");
+    // console.log(checkBox.children[0].children[0]);
+
+    const mfBtn = document.querySelector("#mfBtn");
+
+    for(let i=0; i<myPortlet.length; i++){
+        switch(myPortlet[i]){
+            case "1": checkBox.children[0].children[0].checked = true; break;
+            case "2": checkBox.children[1].children[0].checked = true; break;
+            case "3": checkBox.children[2].children[0].checked = true; break;
+            case "4": checkBox.children[3].children[0].checked = true; break;
+            case "5": checkBox.children[4].children[0].checked = true; break;
+            case "6": checkBox.children[5].children[0].checked = true; break;
+        }
+    }
+
+    for(let i = 0; i < myPortlet.length; i++){
+        let portlet = myPortlet[i];
+        switch(portlet){
+          case "1": layout.innerHTML += "<div class='iitem item1' draggable='true'>1번</div>"; break;
+          case "2": layout.innerHTML += "<div class='iitem item2' draggable='true'>2번</div>"; break;
+          case "3": layout.innerHTML += "<div class='iitem item3' draggable='true'>3번</div>"; break;
+          case "4": layout.innerHTML += "<div class='iitem item4' draggable='true'>4번</div>"; break;
+          case "5": layout.innerHTML += "<div class='iitem item5' draggable='true'>5번</div>"; break;
+          case "6": layout.innerHTML += "<div class='iitem item6' draggable='true'>6번</div>"; break;
+        }
+    } 
+
+    let picked = null;
+    let pickedIndex = null;
+
+    layout.addEventListener("dragstart", (e)=>{
+        const obj = e.target;
+        picked = obj;
+        pickedIndex = ([...obj.parentNode.children].indexOf(obj));
+        // console.log(pickedIndex);
+    });
+
+    layout.addEventListener("dragover", (e)=>{
+        e.preventDefault();
+    });
+
+    layout.addEventListener("drop", (e)=>{
+        const obj = e.target;
+        // console.log(pickedIndex);
+        const index = ([...obj.parentNode.children].indexOf(obj));
+        index > pickedIndex ? obj.after(picked): obj.before(picked);
+    });
+
+
+
+    mfBtn.addEventListener("click", () => {
+        let portNum = "";
+        var iitem = document.querySelectorAll(".iitem");
+        for(let i=0; i<iitem.length; i++){
+            let checkNum = iitem[i].className;
+            // console.log(checkNum);
+            portNum += checkNum.replaceAll(regex, "");
+        }
+
+        console.log(portNum);
+
+    });
+
+
+    var timer = setInterval(nowTime,1000);
+                    
+    function nowTime(){
+        var date = new Date();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        var time = "현재 시간 : ";
+        document.querySelector('#whatTimeIsItNow').innerHTML = time + hour + "시 " + minute+ "분 " + second +"초";
+    }
+</script>
+<script>
+    const mMoadl = document.querySelector("#myModal");
+    function fmoalOpen(){
+        mMoadl.style.display = "block";
+    }
+
+    function fmodalClose(){
+        mMoadl.style.display = "none";
+    }
+    
+
+    document.addEventListener("keyup",function(e){
+        let key = e.key;
+        if(key ==="Escape"){
+            // console.log(key);
+            fmodalClose();
+        }else{
+            return false;
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+/*
+    Promise는 중요한데, 다행히 개발자가 직접 Promise를 만들일은 거의 없고
+    라이브러리 만드는 회사들이 만들고, 개발자는 잘 사용하기만 하면 됨
+    원래 블루버드라는 회사가 비동기 처리할 때 콜백을 많이 사용하다 보니
+    콜백 안에 콜백 안에 콜백식으로 프로그램이 짜여지는 것을 보고,
+    Hell of Callback이라 부르고 그것의 해결책으로 내어 놓은 걸, 
+    자바스크립트 언어 개발팀에서 받아들임
+
+*/
+
+   /*  var MyPromise = function(){
+        //return new Promise((resolve, reject)=>{
+        return new Promise((res, rej)=>{
+            // 약속이 잘 실행되었을 때 res함수 호출
+            // 약속이 깨졌을 때 rej함수 호출
+            res("약속 깨짐");
+        });
+    }
+    */
+   // promise가 처음엔 훌륭하단 평가였지만 실제 써보니 callbakc지옥의 모습을
+   // 조금 완화했을뿐 근본적으로는 해결이 안되었다는 평가가 빗발쳐서
+   // 추가적으로 async await 키워드가 추가됨
+   // (평가가 엄청나게 좋음 다른 언어들도 벤치마킹 준비중)
+    const axios = {};   // 네임스페이스용 객체
+
+    axios.get = function(pURL) {
+        return new Promise((res, rej)=>{
+            // 비동기를 위해 ajax
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", pURL, true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    res(JSON.parse(xhr.responseText));
+                }
+            }
+            xhr.onerror = function(){
+                rej(new Error("에에에에러어어어어어"));
+            }
+            xhr.send();
+        });
+    }
+
+    // async await 사용 예시
+    // 함수 자체는 비동기이고 안에는 동기로 처리된다.
+    async function fget(){
+        var rslt = await axios.get("CRUD/dummyData.json");
+        console.log("체크 : " , rslt);
+    }
+    fget();
+    console.log("누가 먼저 찍힐까요 ? ");
+
+    // Promise 사용 패턴
+    // var rsltPromise = axios.get("CRUD/dummyData.json");
+
+    // rsltPromise.then((rslt)=>{
+    //     console.log("결과:", rslt);
+    // }).catch((error) =>{
+    //     console.log("에러:", error);
+    // }).finally(() =>{
+    //     console.log("잘 안씀");
+    // });
+
+
+
+
+</script>
