@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+    <table class="tabletime" border="1">
+        <thead>
+            <tr>
+                <th style="width: 20%;">구분</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+            </tr>
+        </thead>
+        <tbody id="timeBody">
+            <tr>
+                <td class="time1">1교시</td>
+                <td class="mon"></td>
+                <td class="tue"></td>
+                <td class="wed"></td>
+                <td class="thur"></td>
+                <td class="fri"></td>
+            </tr>
+            <tr>
+                <td class="time2">2교시</td>
+                <td class="mon"></td>
+                <td class="tue"></td>
+                <td class="wed"></td>
+                <td class="thur"></td>
+                <td class="fri"></td>
+            </tr>
+            <tr>
+                <td class="time3">3교시</td>
+                <td class="mon"></td>
+                <td class="tue"></td>
+                <td class="wed"></td>
+                <td class="thur"></td>
+                <td class="fri"></td>
+            </tr>
+            <tr>
+                <td class="time4">4교시</td>
+                <td class="mon"></td>
+                <td class="tue"></td>
+                <td class="wed"></td>
+                <td class="thur"></td>
+                <td class="fri"></td>
+            </tr>
+            <tr>
+                <td class="time5">5교시</td>
+                <td class="mon"></td>
+                <td class="tue"></td>
+                <td class="wed"></td>
+                <td class="thur"></td>
+                <td class="fri"></td>
+            </tr>
+            <tr>
+                <td class="time6">6교시</td>
+                <td class="mon"></td>
+                <td class="tue"></td>
+                <td class="wed"></td>
+                <td class="thur"></td>
+                <td class="fri"></td>
+            </tr>
+            <tr>
+                <td class="time7">7교시</td>
+                <td class="mon"></td>
+                <td class="tue"></td>
+                <td class="wed"></td>
+                <td class="thur"></td>
+                <td class="fri"></td>
+            </tr>
+            <tr>
+                <td class="time8">8교시</td>
+                <td class="mon"></td>
+                <td class="tue"></td>
+                <td class="wed"></td>
+                <td class="thur"></td>
+                <td class="fri"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="btn">버튼</button>
+</body>
+<script>
+   var btn = document.querySelector('#btn');
+    
+   var data = [
+        {
+            day: "3", //
+            start: "3",
+            pr : "4"
+        },
+        {
+            day: "1",// 월 
+            start: "2",
+            pr : "3"
+        }
+    ];
+
+   btn.addEventListener('click', function(){
+        var table = $('.tabletime');
+        
+        for(let i=0; i<data.length; i++){
+            for(let j=0; j<data[i].pr; j++){
+                $(table).find('tr').eq(parseInt(data[i].start)+j).find('td').eq(data[i].day).css('background', 'blue');
+            }
+        }
+   });
+</script>
+</html>

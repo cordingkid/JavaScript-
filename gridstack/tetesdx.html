@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>고려대학교 지식기반 포털시스템</title>
+    <style>
+      html {
+        margin:0px;
+        background-color: black;
+      }
+      body {
+        margin:0px;
+      }
+      #logo_area{
+        border-top:3px solid #b30000;
+        background-color: white;
+        margin:0px;
+        width:100%;
+        height:80px;
+      }
+      #logo_area p {
+        margin:0px;
+      }
+      .middle_area{
+        width:1280px;
+        margin:auto;
+
+      }
+     .main_picture{
+        width:73%;
+        height:650px;
+        background-color: skyblue;
+        display: inline-block;
+
+      }
+
+      .main_content{
+        width:1280px;
+        background-color: gray;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .top_right_bar{
+        float:right;
+        background-color: white;
+        padding:35px 20px 20px 20px;
+        font-size:15px;
+      }
+      .top_tag{
+        text-decoration: none;
+        color:gray;
+        margin-left: 2px;
+      }
+      .side_bar{
+        float:right;
+        width:27%;
+        height:500px;
+
+      }
+      .log_in{
+        background-color:  #800000;
+        color:white;
+        width:100%;
+        margin:0px;
+        height:230px;
+      }
+      .log_in_main_text{
+        padding-left: 20px;
+        font-size:22px;
+        padding-top:5px;
+        margin:5px 0px 0px 0px;
+        display: inline-block;
+      }
+      .mini_link{
+        height:165px;
+        width:100%;
+
+      }
+      .notice_box{
+        background-color: #bbb890;
+        height:247px;
+        margin-top: 7px;
+
+      }
+      .bottom_bar {
+        height:40px;
+        background-color: white;
+      }
+      .notice_bar{
+        height:40px;
+        width:1280px;
+        margin-left: auto;
+        margin-right: auto;
+        border-left : 1px solid lightgray;
+      }
+      footer{
+        background-color: #666666;
+        height:180px;
+
+      }
+      .red {
+        color:#b30000;
+      }
+      .lightGray {
+        color:lightGray;
+      }
+      .plus_button{
+        background-color: darkgray;
+        color:white;
+        padding: 2px 0px 8px 10px;
+        margin-left:10px;
+        margin-right: 0px;
+      }
+      .plus{
+        background-color: gray;
+        color:lightGray;
+        font-size: 15px;
+        padding:0px 5px 7px 10px;
+        margin-left: 10px;
+      }
+      .single_id {
+        color: #ffbb99;
+        display: inline-block;
+        font-size: 15px;
+        margin-left:5px;
+      }
+      .id_icon {
+          background-color: orange;
+          color: #800000;
+          font-size:10px;
+          padding:0px 5px 0px 5px;
+          border: 1.5px solid darkorange;
+          font-weight: bold;
+      }
+      input[type=text],input[type=password] {
+        margin-left:20px;
+        margin-right:10px;
+        width:180px;
+        height:22px;
+        margin-bottom: 3px;
+      }
+      input[type=submit] {
+        background-color: #ffe6b3;
+        width:80px;
+        height:57px;
+        border:none;
+        cursor:pointer;
+        color: #800000;
+        font-size:17px;
+        font-weight: bold;
+
+      }
+      .login_mini {
+          float:left;
+      }
+      .log_in_top{
+        margin-bottom: 3px;
+      }
+      .login_detail {
+        margin-top:10px;
+        margin-left: 16px;
+        clear:both;
+        font-size: 13px;
+        display: inline-block;
+      }
+      .login_detail a {
+        color:white;
+        text-decoration: none;
+      }
+      .login_blackbox {
+        background-color: black;
+        width:200px;
+        text-align: center;
+        color:pink;
+        font-size: 13px;
+        height:30px;
+        margin-left:40px;
+      }
+    .button1 {
+        color:pink;
+        background-color: black;
+        border:none;
+        width:300px;
+        margin-left: 10px;
+        height:45px;
+        margin-top: 22px;
+        cursor: pointer;
+        font-size:18px;
+      }
+      .mini_box {
+        background-color:white;
+        width:84px;
+        height:84px;
+        border:1px solid lightgray;
+        font-size: 12px;
+        margin: 0px;
+        padding: 0px;
+        float:left;
+        text-align: center;
+      }
+      .mini_box:hover {
+        background-color: gray;
+        color:white;
+      }
+      .notice_box_content {
+        color:white;
+        font-size: 16px;
+        font-weight: bold;
+        margin-left:20px;
+        padding-top: 30px;
+      }
+      .whiteBox {
+        color:black;
+        font-size:16px;
+        font-weight:normal;
+        background-color: white;
+        margin:1px;
+        width:290px;
+        padding: 2px 5px;
+      }
+      .margin_top{
+        margin-top:5px;
+      }
+      .margin_bottom{
+        margin-bottom:5px;
+      }
+      .TEL_box {
+        color:white;
+        background-color: #ff6600;
+        border:1px solid black;
+        padding:1px 3px;
+        font-size: 9px;
+        margin : 3px;
+      }
+      .brown {
+        background-color: brown;
+      }
+      .brownblack{
+        background-color:  #803300;
+      }
+      .main_title {
+        font-size:17px;
+        font-weight: bold;
+        margin-right: 30px;
+        margin-left:10px;
+      }
+      .bottom_box {
+        width:31%;
+        height:35px;
+        float:left;
+        padding:5px 0px 0px 15px;
+      }
+      .sub_title {
+        font-size:16px;
+
+      }
+      .float {
+        float:left;
+        padding-top:30px;
+        margin-right:20px;
+        vertical-align: center;
+      }
+      .footerBox {
+        padding:20px 400px 10px 10px;
+        font-size: 14px;
+        color: #c0c0c0;
+      }
+      .mid_bottom {
+        margin-left: auto;
+        margin-right: auto;
+        width:1280px;
+      }
+      .bold_content {
+        font-weight:bold;
+      }
+      .white {
+        color:white;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div id="logo_area">
+      <div class="middle_area">
+        <a href="#"><img src="photos\kupid.JPG" alt="KUPID" height="80px"></a>
+        <div class="top_right_bar">
+          <a href="index.html" class="top_tag">서울 캠퍼스</a>
+          <a href="http://sejong.korea.ac.kr/kr" class="top_tag"target="_blank" > <span class="lightGray"> | </span> 세종 캠퍼스</a>
+          <a href="http://www.kumc.or.kr/main/index.do" class="top_tag"> <span class="lightGray">|</span> 의료원</a>
+          <a href="https://portal.korea.ac.kr/front/Intro.kpd?language=en" class="top_tag red"> <span class="lightGray">|</span> ENGLISH</a>
+            <span class="plus_button">교내홈페이지  <span class="plus">+</span></span>
+
+
+        </div>
+      </div>
+    </div>
+      <div class="main_content">
+        <div class="main_picture">
+          <img src="photos\inchon.jpg" alt="inchon" width="100%" height="100%">
+        </div>
+    <div class="side_bar">
+
+      <div class="log_in">
+
+            <div class="log_in_top">
+              <h3 class="log_in_main_text">로그인</h3>
+              <p class="single_id">| <span class="id_icon">ID</span> 싱글 아이디 신청</p>
+            </div>
+
+            <form action="">
+              <div class="login_main">
+                <spaan class="login_mini">
+                  <input type="text" size="18"><br>
+                  <input type="password" size="18">
+                </spaan>
+                <spaan class="login_mini">
+                  <input type="submit" value="로그인">
+                </span>
+              </div>
+            </form>
+            <div class="login_detail">
+            <span ><a href="#" >▶ 아이디 / 비밀번호 찾기</a><br></span>
+            <strong class="margin_top"><a href="#">▶ [로그인 오류 안내]</a></strong><br>
+            <form >
+              <button class="button1">공인인증서 로그인</button>
+            </form>
+            </div>
+      </div>
+
+          <div class="mini_link">
+              <div class="mini_box">메일</div>
+              <div class="mini_box">연구포털</div>
+              <div class="mini_box">도서관</div>
+              <div class="mini_box">제증명</div>
+              <div class="mini_box">수강신청</div>
+              <div class="mini_box">성적조회</div>
+              <div class="mini_box">장학금신청</div>
+              <div class="mini_box">원격지원</div>
+          </div>
+
+          <div class="notice_box ">
+            <div class="notice_box_content">
+            <span class="notice_text">▶ 포털 아이디/비밀번호 문의<br></span>
+            <div class="whiteBox margin_top">
+              학생<br><span class="TEL_box">TEL</span>02-3290-1141~5, 4090~2
+            </div>
+            <div class="whiteBox margin_bottom">
+              교직원<br><span class="TEL_box brown">TEL</span>02-3290-4777<br>
+            </div>
+            ▶ 정보전산 문의 (무선랜안내:4194)
+            <div class="whiteBox margin_top">
+              <span class="TEL_box brownblack">TEL</span>02-3290-4777
+            </div>
+          </div>
+          </div>
+        </div>
+    </div>
+    <div class="bottom_bar">
+    <div class="notice_bar">
+      <div class="bottom_box">
+        <span class="main_title">공지사항</span>
+        <span class="sub_title">2020-2 학습공동체 KU...</span>
+        <a href="#"><img src="photos\before_btn.png" alt="before" width="14px"></a>
+        <a href="#"><img src="photos\after_btn.png" alt="before" width="14px"></a>
+      </div>
+      <div class="bottom_box">
+        <span class="main_title">주요학사일정</span>
+        <span class="sub_title">[학부]2020학년도 제2...</span>
+        <a href="#"><img src="photos\before_btn.png" alt="before" width="14px"></a>
+        <a href="#"><img src="photos\after_btn.png" alt="before" width="14px"></a>
+      </div>
+      <div class="bottom_box">
+        <span class="main_title">FAQ</span>
+        <span class="sub_title">사용자 별 ID 발급/폐기...</span>
+        <a href="#"><img src="photos\before_btn.png" alt="before" width="14px"></a>
+        <a href="#"><img src="photos\after_btn.png" alt="before" width="14px"></a>
+      </div>
+      <img src="photos\bottom_arrow.png" alt="botton_arrow" width="42px" >
+    </div>
+    </div>
+    <footer>
+      <div class="mid_bottom">
+        <img src="photos\logo.JPG" alt="Korea Univ" class="float" width="150px">
+      <div class="footerBox">
+        <span class="bold_content white">개인정보처리방침</span> | 정보보보안 | 전력현황(그린캠퍼스)<br>
+          <span class="white">[서울]</span> 02841 서울특별시 성북구 안암로 고려대학교 TEL.02-3290-1114  |  <span class="white"> [세종] </span>30019 세종특별자치시 세종로 고려대학교 세종캠퍼스 TEL.044-860-1114<br>
+        COPYRIGHT(C)2014 KOREA UNIVERSITY. ALL RIGHTS RESERVED.
+        Made By Mihae
+      </div>
+      </div>
+    </footer>
+  </body>
+</html>

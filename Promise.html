@@ -49,7 +49,13 @@
         var rslt = await axios.get("CRUD/dummyData.json");
         console.log("체크 : " , rslt);
     }
-    fget();
+    fget().then(() =>{
+        console.log("res 들어왔을때");
+    }, ()=>{
+        console.log("실패 들어왔을때");
+    }).catch(() =>{
+        console.log("에러가 나고 catch하기");
+    });
     console.log("누가 먼저 찍힐까요 ? ");
 
     // Promise 사용 패턴

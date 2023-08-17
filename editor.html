@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- Core  include only Paragraph block -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <!-- Header Plug-in-->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <!-- Link embeds-->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/link@2.5.0/dist/bundle.min.js"></script>
+    <!-- Raw Html -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/raw@2.4.0/dist/bundle.min.js"></script>
+    <!-- Simple Image -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@1.5.1/dist/bundle.min.js"></script>
+    <!-- Image -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/image@2.8.1/dist/bundle.min.js"></script>
+    <!-- CheckList -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script>
+    <!-- List -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <!-- Embed -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script>
+    <!-- Quote -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@2.5.0/dist/bundle.min.js"></script>
+    <!-- Table -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/table@2.2.1/dist/table.min.js"></script>
+    <!-- Nested List -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/nested-list@latest"></script>
+    <!-- Delimiter -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@1.3.0/dist/bundle.min.js"></script>
+    <!-- Warning -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script>
+    <!-- Code -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@2.8.0/dist/bundle.min.js"></script>
+    <!--  Attach -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/attaches@latest"></script>
+    <!-- Marker-->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script>
+    <!-- Inline Code -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@1.4.0/dist/bundle.min.js"></script>
+    <!-- UnderLine -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/underline@latest"></script>
+    <!-- Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/editorjs-alert@latest"></script>
+    <!-- Mermaid  필요없는 놈 
+    <script src="https://cdn.jsdelivr.net/npm/editorjs-mermaid@latest"></script>
+    -->
+    <!-- Codeflask -->
+    <script src="https://cdn.jsdelivr.net/npm/@calumk/editorjs-codeflask@latest"></script>
+</head>
+
+<body>
+    <button onclick="fSave()">저장</button>
+    <button onclick="fChg()">바꾸깅</button>
+    <div id="myEditor"></div>
+    <script>
+        // 내용 바꾸깅
+        async function fChg() {
+            let data = { "time": 0, "blocks": [{ "type": "header", "data": { "text": "이거슨 바뀐 데이터ㅋㅋ", "level": 1 } }], "version": "2.26.5" }
+            editor.render(data);
+        }
+
+        // 내용 저장 (localStorage에 할깡, DB에 할깡 clob롱)
+        async function fSave() {
+            alert("Please enter");
+            let rslt = await editor.save();
+            console.log("체크:", rslt);
+            console.log("체크:", JSON.stringify(rslt));
+        }
+
+
+
+        const myHolder = document.querySelector("#myEditor");
+        /*
+           잘 된 설정을 가지고 있는 게 필요
+        */
+        const editor = new EditorJS({
+            holder: myHolder,
+            // 뿌릴 데이터들
+            data: {
+                blocks: [
+                    {
+                        "type": "header",
+                        "data": {
+                            "text": "이것은 첨부터 보이는 데이터",
+                            "level": 2
+                        }
+                    },
+                    {
+                        "type": "linkTool",
+                        "data": {
+                            "link": "https://e-7-e.tistory.com",
+                            "meta": {
+                                "title": "E7E 만만세",
+                                "site_name": "E7E BLOG",
+                                "description": "비오는 날은 언제나, 가슴이 눈물로 가득찬당?, 안찬당?",
+                                "image": {
+                                    "url": "https://wimg.mk.co.kr/news/cms/202304/14/news-p.v1.20230414.15e6ac6d76a84ab398281046dc858116_P1.jpg"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "raw",
+                        "data": {
+                            "html": `<div style=\"background: #000; color: #fff; font-size: 30px; padding: 50px;\">
+                                     \n무엇이든 HTML
+                                     \n</div>`,
+                        }
+                    },
+                    {
+                        "type": "simImg",
+                        "data": {
+                            "url": "https://image.ytn.co.kr/general/jpg/2022/0228/202202281325208959_d.jpg",
+                            "caption": "오 오 로제님!",
+                            "withBorder": true,
+                            "withBackground": true,
+                            "stretched": false
+                        }
+                    },
+                    {
+                        "type": "image",
+                        "data": {
+                            "file": {
+                                "url": "https://www.tesla.com/tesla_theme/assets/img/_vehicle_redesign/roadster_and_semi/roadster/hero.jpg"
+                            },
+                            "caption": "Roadster // tesla.com",
+                            "withBorder": false,
+                            "withBackground": false,
+                            "stretched": false
+                        }
+                    },
+                    {
+                        "type": "checklist",
+                        "data": {
+                            "items": [
+                                {
+                                    "text": "지나는 지나치는 법이 없음",
+                                    "checked": true
+                                },
+                                {
+                                    "text": "서니는 줌 apif를 잘 한당",
+                                    "checked": true
+                                },
+                                {
+                                    "text": "비오는 화요일!!! 슬프당",
+                                    "checked": false
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "list",
+                        "data": {
+                            "style": "ordered",
+                            "items": [
+                                "이거슨 리스트 아이템이예용",
+                                "리스트라니까용",
+                                "간단하고 파워풀하지용",
+                                "비슷한 설정이 반복되는 게 못생겼어요"
+                            ]
+                        }
+                    },
+                    {
+                        "type": "embed",
+                        "data": {
+                            "service": "coub",
+                            "source": "https://www.youtube.com/watch?v=t7hqUhdycQk",
+                            "embed": "https://www.youtube.com/embed/t7hqUhdycQk",
+                            "width": 580,
+                            "height": 320,
+                            "caption": "AOA 모야?"
+                        }
+                    },
+                    {
+                        "type": "quote",
+                        "data": {
+                            "text": "음 이것은 인용구문을 쓸 때 유용하겠군",
+                            "caption": "E7E 말쌈!",
+                            "alignment": "left"
+                        }
+                    },
+                    {
+                        "type": "table",
+                        "data": {
+                            "withHeadings": true,
+                            "content": [["Kine", "Pigs", "Chicken"], ["1 pcs", "3 pcs", "12 pcs"], ["100$", "200$", "150$"]]
+                        }
+                    },
+                    {
+                        "type": "nestedlist",
+                        "data": {
+                            "style": "unordered",
+                            "items": [
+                                {
+                                    "content": "Apples",
+                                    "items": [
+                                        {
+                                            "content": "Red",
+                                            "items": [
+                                                {
+                                                    "content": "Roze"
+                                                },
+                                                {
+                                                    "content": "Jenni"
+                                                },
+                                                {
+                                                    "content": "Risa"
+                                                }
+
+                                            ]
+                                        },
+                                        {
+                                            "content": "Green",
+                                            "items": []
+                                        },
+                                    ]
+                                },
+                                {
+                                    "content": "Bananas",
+                                    "items": [
+                                        {
+                                            "content": "Yellow",
+                                            "items": []
+                                        },
+                                    ]
+                                },
+                            ]
+                        }
+                    },
+                    {
+                        "type": "delimiter",
+                        "data": {}
+                    },
+                    {
+                        "type": "warning",
+                        "data": {
+                            "title": "메몽:",
+                            "message": "스스로를 경고하랑. 그것만이 살길이당"
+                        }
+                    },
+                    {
+                        "type": "code",
+                        "data": {
+                            "code": "body {\n font-size: 14px;\n line-height: 16px;\n}",
+                        }
+                    },
+                    {
+                        "type": "attaches",
+                        "data": {
+                            "file": {
+                                "url": "https://www.tesla.com/tesla_theme/assets/img/_vehicle_redesign/roadster_and_semi/roadster/hero.jpg",
+                                "size": 91,
+                                "name": "hero.jpg",
+                                "extension": "jpg"
+                            },
+                            "title": "Hero"
+                        }
+                    },
+                    {
+                        "type": "paragraph",
+                        "data": {
+                            "text": "Create a directory for your module, enter it and run <mark class=\"cdx-marker\">npm init</mark> command."
+                        }
+                    },
+                    {
+                        "type": "paragraph",
+                        "data": {
+                            "text": "Create a directory for your module, enter it and run <span class=\"inline-code\">npm init</span> command."
+                        }
+                    },
+                    {
+                        "type": "header",
+                        "data": {
+                            "text": "Create a directory for your module, enter it and run <u class=\"cdx-underline\">npm init</u> command."
+                        }
+                    },
+                    {
+                        "type": "alert",
+                        "data": {
+                            "type": "danger",
+                            "align": "left",
+                            "message": "<strong>행사 smokes!</strong><br>내겐 휴식이 <em>필요해</em> 레알!."
+                        }
+                    }
+
+                ]
+            },
+            // 추가 플러그인들 설정
+            tools: {
+                // Header 설정
+                header: {
+                    class: Header,
+                    config: {
+                        placeholder: '헤더를 넣으삼',
+                        levels: [1, 2, 3, 4, 5, 6],
+                        defaultLevel: 3,
+                    },
+                    shortcut: 'CMD+SHIFT+H',
+                },
+                linkTool: {
+                    class: LinkTool,
+                    config: {
+                        header: '', // get request header 선택사항
+                        //백엔드 데이터 가져오깅( Cross Origin에 주의)
+                        endpoint: 'http://localhost:9004/editor/link',
+                    }
+                },
+                raw: {
+                    class: RawTool,
+                    config: {
+                        placeholder: "플레이스 홀더랑"
+                    }
+                },
+                simImg: {
+                    class: SimpleImage
+                    //No Config
+                },
+                image: {
+                    class: ImageTool,
+                    config: {
+                        // Your backend file uploader endpoint
+                        byFile: 'http://localhost:9004/uploadFile',
+
+                        // Your endpoint that provides uploading by Url
+                        byUrl: 'http://localhost:9004/fetchUrl',
+                        buttonContent: "파일 올릴거얌",
+                        actions: [
+                            {
+                                name: 'new_button',
+                                icon: '<svg>...</svg>',
+                                title: 'New Button',
+                                toggle: true,
+                                action: (name) => {
+                                    alert(`${name} button clicked`);
+                                }
+                            }
+                        ]
+                    }
+                },
+                checklist: {
+                    class: Checklist,
+                    inlineToolbar: true
+                    // No Config
+                },
+                list: {
+                    class: List,
+                    inlineToolbar: true,
+                    config: {
+                        defaultStyle: 'unordered'
+                    }
+                },
+                embed: {
+                    class: Embed,
+                    inlineToolbar: true,
+                    config: {
+                        services: {
+                            youtube: true,
+                            coub: true
+                        }
+                    }
+                },
+                quote: {
+                    class: Quote,
+                    inlineToolbar: true,
+                    shortcut: 'CMD+SHIFT+O',
+                    config: {
+                        quotePlaceholder: 'Quote 입력',
+                        captionPlaceholder: 'Quote\'s 작자들',
+                    },
+                },
+                table: {
+                    class: Table,
+                    inlineToolbar: true,
+                    config: {
+                        rows: 2,
+                        cols: 3,
+                        withHeadings: true
+                    },
+                },
+                nestedlist: {
+                    class: NestedList,
+                    inlineToolbar: true,
+                    config: {
+                        defaultStyle: 'unordered'
+                    },
+                },
+                delimiter: {
+                    class: Delimiter
+                    //No Config
+                },
+                warning: {
+                    class: Warning,
+                    inlineToolbar: true,
+                    shortcut: 'CMD+SHIFT+W',
+                    config: {
+                        titlePlaceholder: 'Title',
+                        messagePlaceholder: 'Message',
+                    },
+                },
+                code: {
+                    class: CodeTool,
+                    placeholder: "코드 적어주삼"
+                },
+                attaches: {
+                    class: AttachesTool,
+                    config: {
+                        /**
+                         * Custom uploader
+                         */
+                        uploader: {
+                            /**
+                             * Upload file to the server and return an uploaded image data
+                             * @param {File} file - file selected from the device or pasted by drag-n-drop
+                             * @return {Promise.<{success, file: {url}}>}
+                             */
+                            uploadByFile(file) {
+                                // your own uploading logic here
+                                return MyAjax.upload(file).then((response) => {
+                                    return {
+                                        success: 1,
+                                        file: {
+                                            url: response.fileurl,
+                                            // any data you want
+                                            // for example: name, size, title
+                                        }
+                                    };
+                                });
+                            },
+                        }
+                    }
+                },
+                marker: {
+                    class: Marker,
+                    shortcut: 'CMD+SHIFT+M',
+                    //No Config
+                },
+                inlineCode: {
+                    class: InlineCode,
+                    shortcut: 'CMD+SHIFT+C',
+                    //No Config
+                },
+                underline: {
+                    class: Underline
+                    //No Config
+                },
+                alert: {
+                    class: Alert,
+                    inlineToolbar: true,
+                    shortcut: 'CMD+SHIFT+A',
+                    config: {
+                        defaultType: 'primary',
+                        messagePlaceholder: 'Enter something',
+                    }
+                },
+                code2 : {
+                    class: editorjsCodeflask,
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>
